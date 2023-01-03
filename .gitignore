@@ -1,5 +1,6 @@
 node_modules/
-request/
+requestHttp/*
+/requestHttp
 .expo/
 dist/
 npm-debug.*
@@ -15,3 +16,4 @@ web-build/
 .DS_Store
 
 .env
+pexels.http
