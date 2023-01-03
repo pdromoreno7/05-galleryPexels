@@ -1,9 +1,14 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const CardImage = ({ image }) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.cardImage}>
+    <TouchableOpacity
+      style={styles.cardImage}
+      onPress={() => navigation.navigate("ImageScreen", { image })}
+    >
       <Image
         source={{
           uri: image.src.medium
@@ -12,7 +17,7 @@ const CardImage = ({ image }) => {
         }}
         style={{ width: "100%", height: 200, borderRadius: 10 }}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 
