@@ -2,8 +2,6 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
 const ImageScreen = ({ route }) => {
-  console.log("🚀 ~ file: ImageScreen.js:5 ~ ImageScreen ~ route", route);
-
   const { image } = route.params;
   return (
     <View>

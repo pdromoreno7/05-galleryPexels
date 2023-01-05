@@ -15,7 +15,7 @@ const CardImage = ({ image }) => {
             ? image.src.medium
             : "https://picsum.photos/200/200?image=10",
         }}
-        style={{ width: "100%", height: 200, borderRadius: 10 }}
+        style={{ width: "100%", height: 200, borderRadius: 3 }}
       />
     </TouchableOpacity>
   );
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     margin: 4,
     justifyContent: "space-between",
     backgroundColor: "#2c292c",
-    borderWidth: 0,
+    // borderWidth: 0,
     borderRadius: 10,
   },
 });

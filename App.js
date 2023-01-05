@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
@@ -9,18 +10,18 @@ import ImageScreen from "./screens/ImageScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [openSearch, setOpenSearch] = useState(false);
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
-          component={HomeScreen}
           options={{
             title: "Home",
             headerLeft: () => (
               <Image
                 source={{
-                  uri: "https://play-lh.googleusercontent.com/KtFwMsqVzBBpTFc8vR5SZRCNBvqknlWurnzTRl4J-2kdZhoM04LjklX9Vh8pl-fYfpU",
+                  uri: "https://static.vecteezy.com/system/resources/previews/015/568/289/original/app-logo-minimalist-logo-company-logo-free-vector.jpg",
                 }}
                 style={styles.logoMain}
               />
@@ -28,18 +29,20 @@ export default function App() {
             headerRight: () => (
               <Text
                 style={{ fontSize: 18 }}
-                onPress={() => console.log("search")}
+                onPress={() => setOpenSearch(!openSearch)}
               >
-                Search
+                {openSearch ? "Close" : "Search"}
               </Text>
             ),
-            title: "Pexels App",
+            title: "Wallpaper Gallery",
             headerTitleStyle: {
               fontWeight: "bold",
               textAling: "center",
             },
           }}
-        />
+        >
+          {(props) => <HomeScreen {...props} openSearch={openSearch} />}
+        </Stack.Screen>
         <Stack.Screen name="ImageScreen" component={ImageScreen} />
       </Stack.Navigator>
       <StatusBar style="auto" />
