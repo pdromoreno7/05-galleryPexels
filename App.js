@@ -43,7 +43,20 @@ export default function App() {
         >
           {(props) => <HomeScreen {...props} openSearch={openSearch} />}
         </Stack.Screen>
-        <Stack.Screen name="ImageScreen" component={ImageScreen} />
+        <Stack.Screen
+          name="ImageScreen"
+          component={ImageScreen}
+          options={{
+            headerStyle: {
+              backgroundColor: "#0D0D0D",
+            },
+            title: "Wallpaper Gallery",
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

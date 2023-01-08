@@ -6,12 +6,15 @@ import { Button, Input } from "@rneui/themed";
 
 const HomeScreen = ({ openSearch }) => {
   const [photos, setPhostos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const loadImages = async () => {
-    const res = await getImages();
+  const loadImages = async (term) => {
+    const res = await getImages(term);
     setPhostos(res.data.photos);
-    console.log("🚀 ~ file: HomeScreen.js:8 ~ loadImages ~ res", res.headers);
+    // console.log("🚀 ~ file: HomeScreen.js:8 ~ loadImages ~ res", res.headers);
   };
+
+  const handleSearch = async () => loadImages(searchTerm);
 
   useEffect(() => {
     loadImages();
