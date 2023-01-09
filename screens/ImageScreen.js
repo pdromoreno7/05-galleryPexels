@@ -6,12 +6,28 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Button } from "@rneui/themed";
+import { getImages } from "../api/pexels";
+import ImageList from "../components/ImageList";
 
 const ImageScreen = ({ route }) => {
   const { image } = route.params;
-  console.log("🚀 ~ file: ImageScreen.js:7 ~ ImageScreen ~ image", image);
+  console.log(
+    "🚀 ~ file: ImageScreen.js:16 ~ ImageScreen ~ params",
+    route.params
+  );
+  const [images, setImages] = useState([]);
+  console.log("🚀 ~ file: ImageScreen.js:16 ~ ImageScreen ~ images", images);
+
+  const loadImages = async (term) => {
+    const res = await getImages(term);
+    setImages(res.data.photos);
+  };
+
+  useEffect(() => {
+    loadImages(image.alt);
+  }, []);
 
   const handlePress = async () => await Linking.openURL(image.photographer_url);
 
@@ -61,6 +77,9 @@ const ImageScreen = ({ route }) => {
           buttonStyle={{ backgroundColor: "#FEBC00" }}
           onPress={() => handleDownload()}
         />
+      </View>
+      <View>
+        <ImageList photos={images} />
       </View>
     </View>
   );

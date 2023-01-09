@@ -48,10 +48,10 @@ export default function App() {
           component={ImageScreen}
           options={{
             headerStyle: {
-              backgroundColor: "#0D0D0D",
+              // backgroundColor: "#0D0D0D",
             },
             title: "Wallpaper Gallery",
-            headerTintColor: "#fff",
+            // headerTintColor: "#fff",
             headerTitleStyle: {
               fontWeight: "bold",
             },
