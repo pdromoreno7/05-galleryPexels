@@ -36,7 +36,7 @@ const ImageScreen = ({ route }) => {
 
     try {
       const { uri } = await FileSystem.downloadAsync(
-        image.src.portrait,
+        image.src.large2x,
         fileUri
       );
       saveFile(uri);
