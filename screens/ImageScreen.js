@@ -10,19 +10,43 @@ import React, { useEffect, useState } from "react";
 import { Avatar, Button } from "@rneui/themed";
 import { getImages } from "../api/pexels";
 import ImageList from "../components/ImageList";
+import * as FileSystem from "expo-file-system";
+import * as MediaLibrary from "expo-media-library";
 
 const ImageScreen = ({ route }) => {
   const { image } = route.params;
-  console.log(
-    "🚀 ~ file: ImageScreen.js:16 ~ ImageScreen ~ params",
-    route.params
-  );
+
   const [images, setImages] = useState([]);
-  console.log("🚀 ~ file: ImageScreen.js:16 ~ ImageScreen ~ images", images);
 
   const loadImages = async (term) => {
     const res = await getImages(term);
     setImages(res.data.photos);
+  };
+
+  const saveFile = async (fileUri) => {
+    const { status } = await MediaLibrary.requestPermissionsAsync();
+    if (status === "granted") {
+      const asset = await MediaLibrary.createAssetAsync(fileUri);
+      await MediaLibrary.createAlbumAsync("Download", asset, false);
+    }
+  };
+
+  const downloadFile = async () => {
+    let fileUri = FileSystem.documentDirectory + image.id + ".jpeg";
+
+    try {
+      const { uri } = await FileSystem.downloadAsync(
+        image.src.portrait,
+        fileUri
+      );
+      saveFile(uri);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDownload = async () => {
+    downloadFile();
   };
 
   useEffect(() => {
@@ -35,7 +59,7 @@ const ImageScreen = ({ route }) => {
     <View>
       <Image
         source={{
-          uri: image.src.large,
+          uri: image.src.large2x,
           height: 350,
           width: "100%",
         }}

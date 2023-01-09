@@ -11,8 +11,8 @@ const CardImage = ({ image }) => {
     >
       <Image
         source={{
-          uri: image.src.medium
-            ? image.src.medium
+          uri: image.src.portrait
+            ? image.src.portrait
             : "https://picsum.photos/200/200?image=10",
         }}
         style={{ width: "100%", height: 200, borderRadius: 3 }}
